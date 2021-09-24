@@ -88,6 +88,6 @@ class ArtistsTest extends TestCase
         $this->json('delete', "api/artists/$artist->id")
              ->seeStatusCode(Response::HTTP_NO_CONTENT);
 
-        $this->notSeeInDatabase('artists', $artist);
+        $this->notSeeInDatabase('artists', $artist->toArray());
     }
 }

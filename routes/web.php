@@ -16,3 +16,11 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('artists', 'ArtistController@all');
+    $router->post('artists', 'ArtistController@create');
+    $router->get('artists/{id}', 'ArtistController@show');
+    $router->put('artists/{id}', 'ArtistController@update');
+    $router->delete('artists/{id}', 'ArtistController@delete');
+});
