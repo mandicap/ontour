@@ -19,4 +19,24 @@ class Venue extends Model
      * @var array
      */
     protected $hidden = [];
+
+    /**
+     * Attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
+     * Gets the venue's tours.
+     *
+     * @return void
+     */
+    public function tours()
+    {
+        return $this->belongsToMany(Tour::class)->using(TourVenue::class);
+    }
 }

@@ -20,7 +20,8 @@ class ArtistController extends Controller
     public function create(Request $request)
     {
         $artist = Artist::create($this->validate($request, [
-            'name' => 'required|unique:artists'
+            'name' => 'required|unique:artists',
+            'on_tour' => 'boolean'
         ]));
 
         return response()->json(['data' => $artist], 201);

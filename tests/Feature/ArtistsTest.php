@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Artist;
-use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
@@ -18,6 +17,7 @@ class ArtistsTest extends TestCase
                      '*' => [
                          'id',
                          'name',
+                         'on_tour',
                          'created_at',
                          'updated_at'
                      ]
@@ -28,7 +28,8 @@ class ArtistsTest extends TestCase
     public function testNewArtistIsCreatedSuccessfully()
     {
         $payload = [
-            'name' => $this->faker->name
+            'name' => $this->faker->name,
+            'on_tour' => $this->faker->boolean()
         ];
 
         $this->json('post', 'api/artists', $payload)
@@ -37,6 +38,7 @@ class ArtistsTest extends TestCase
                  'data' => [
                      'id',
                      'name',
+                     'on_tour',
                      'created_at',
                      'updated_at'
                  ]
@@ -55,6 +57,7 @@ class ArtistsTest extends TestCase
                  'data' => [
                     'id' => $artist->id,
                     'name' => $artist->name,
+                    'on_tour' => $artist->on_tour,
                     'created_at' => $artist->created_at,
                     'updated_at' => $artist->updated_at
                  ]
@@ -66,7 +69,8 @@ class ArtistsTest extends TestCase
         $artist = Artist::factory()->create()->first();
 
         $payload = [
-            'name' => $this->faker->name
+            'name' => $this->faker->name,
+            'on_tour' => $this->faker->boolean()
         ];
 
         $this->json('put', "api/artists/$artist->id", $payload)
@@ -75,6 +79,7 @@ class ArtistsTest extends TestCase
                  'data' => [
                     'id' => $artist->id,
                     'name' => $payload['name'],
+                    'on_tour' => $payload['on_tour'],
                     'created_at' => $artist->created_at,
                     'updated_at' => $artist->updated_at
                  ]

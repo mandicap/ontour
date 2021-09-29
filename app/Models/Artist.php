@@ -14,7 +14,7 @@ class Artist extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'on_tour'];
 
     /**
      * Attributes to be excluded from JSON form of model.
@@ -32,4 +32,14 @@ class Artist extends Model
         'created_at',
         'updated_at'
     ];
+
+    /**
+     * Gets the artist's tours.
+     *
+     * @return void
+     */
+    public function tours()
+    {
+        return $this->belongsToMany(Tour::class)->using(ArtistTour::class);
+    }
 }

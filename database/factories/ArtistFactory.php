@@ -23,6 +23,7 @@ class ArtistFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'on_tour' => $this->faker->boolean()
         ];
     }
 }
