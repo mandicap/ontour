@@ -1,15 +1,15 @@
 version: '3.7'
 
 services:
-  php:
+  php-fpm:
     build:
       context: ./
       dockerfile: Dockerfile
     image: lumen
     restart: unless-stopped
-    working_dir: /var/www/
+    working_dir: /var/www
     volumes:
-      - '.:/var/www'
+      - .:/var/www
     networks:
       - lumen
 
@@ -20,7 +20,7 @@ services:
       - 80:80
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - ./docker-compose/nginx:/etc/nginx/conf.d
     networks:
       - lumen
 
@@ -32,6 +32,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
+    ports:
+      - 3306:3306
     networks:
       - lumen
 

@@ -30,6 +30,7 @@ class ArtistController extends Controller
     public function update(Request $request, $id)
     {
         $artist = Artist::findOrFail($id);
+
         $artist->update($request->except('id'));
 
         return response()->json(['data' => $artist]);
