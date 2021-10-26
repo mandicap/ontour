@@ -13,14 +13,12 @@ class ArtistsTest extends TestCase
         $this->json('get', 'api/artists')
              ->seeStatusCode(Response::HTTP_OK)
              ->seeJsonStructure([
-                 'data' => [
-                     '*' => [
-                         'id',
-                         'name',
-                         'on_tour',
-                         'created_at',
-                         'updated_at'
-                     ]
+                 '*' => [
+                     'id',
+                     'name',
+                     'on_tour',
+                     'created_at',
+                     'updated_at'
                  ]
              ]);
     }
@@ -35,13 +33,11 @@ class ArtistsTest extends TestCase
         $this->json('post', 'api/artists', $payload)
              ->seeStatusCode(Response::HTTP_CREATED)
              ->seeJsonStructure([
-                 'data' => [
-                     'id',
-                     'name',
-                     'on_tour',
-                     'created_at',
-                     'updated_at'
-                 ]
+                 'id',
+                 'name',
+                 'on_tour',
+                 'created_at',
+                 'updated_at'
              ]);
 
         $this->seeInDatabase('artists', $payload);
@@ -54,13 +50,11 @@ class ArtistsTest extends TestCase
         $this->json('get', "api/artists/$artist->id")
              ->seeStatusCode(Response::HTTP_OK)
              ->seeJsonEquals([
-                 'data' => [
-                    'id' => $artist->id,
-                    'name' => $artist->name,
-                    'on_tour' => $artist->on_tour,
-                    'created_at' => $artist->created_at,
-                    'updated_at' => $artist->updated_at
-                 ]
+                 'id' => $artist->id,
+                 'name' => $artist->name,
+                 'on_tour' => $artist->on_tour,
+                 'created_at' => $artist->created_at,
+                 'updated_at' => $artist->updated_at
              ]);
     }
 
@@ -76,13 +70,11 @@ class ArtistsTest extends TestCase
         $this->json('put', "api/artists/$artist->id", $payload)
              ->seeStatusCode(Response::HTTP_OK)
              ->seeJsonEquals([
-                 'data' => [
-                    'id' => $artist->id,
-                    'name' => $payload['name'],
-                    'on_tour' => $payload['on_tour'],
-                    'created_at' => $artist->created_at,
-                    'updated_at' => $artist->updated_at
-                 ]
+                 'id' => $artist->id,
+                 'name' => $payload['name'],
+                 'on_tour' => $payload['on_tour'],
+                 'created_at' => $artist->created_at,
+                 'updated_at' => $artist->updated_at
              ]);
     }
 

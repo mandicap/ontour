@@ -9,12 +9,12 @@ class ArtistController extends Controller
 {
     public function all()
     {
-        return response()->json(['data' => Artist::all()]);
+        return response()->json(Artist::all());
     }
 
     public function show($id)
     {
-        return response()->json(['data' => Artist::find($id)]);
+        return response()->json(Artist::find($id));
     }
 
     public function create(Request $request)
@@ -24,7 +24,7 @@ class ArtistController extends Controller
             'on_tour' => 'boolean'
         ]));
 
-        return response()->json(['data' => $artist], 201);
+        return response()->json($artist, 201);
     }
 
     public function update(Request $request, $id)
@@ -33,7 +33,7 @@ class ArtistController extends Controller
 
         $artist->update($request->except('id'));
 
-        return response()->json(['data' => $artist]);
+        return response()->json($artist);
     }
 
     public function delete($id)
