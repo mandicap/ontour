@@ -12,4 +12,14 @@ class ArtistTour extends Pivot
      * @var boolean
      */
     public $incrementing = true;
+
+    /**
+     * Attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
 }
