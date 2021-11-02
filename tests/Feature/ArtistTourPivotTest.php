@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Artist;
 use App\Models\Tour;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class ArtistTourPivotTest extends TestCase
@@ -36,5 +37,26 @@ class ArtistTourPivotTest extends TestCase
             'artist_id' => $artist->id,
             'tour_id' => $tour->id
         ]);
+    }
+
+    public function testReturnsSpecifiedArtistWithToursInValidFormat()
+    {
+        $artist = Artist::factory()->create()->first();
+
+        $tour = $artist->tours()->create([
+            'name' => $this->faker->sentence(),
+            'active' => $this->faker->boolean()
+        ]);
+
+        $this->json('get', "api/artists/$artist->id")
+             ->seeStatusCode(Response::HTTP_OK)
+             ->seeJsonEquals([
+                'id' => $artist->id,
+                'name' => $artist->name,
+                'on_tour' => $artist->on_tour,
+                'created_at' => $artist->created_at,
+                'updated_at' => $artist->updated_at,
+                'tours' => $artist->tours()->get()
+             ]);
     }
 }
