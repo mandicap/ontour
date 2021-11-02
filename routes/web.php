@@ -23,4 +23,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('artists/{id}', 'ArtistController@show');
     $router->put('artists/{id}', 'ArtistController@update');
     $router->delete('artists/{id}', 'ArtistController@delete');
+
+    $router->get('tours', 'TourController@all');
+    $router->post('tours', 'TourController@create');
+    $router->get('tours/{id}', 'TourController@show');
+    $router->put('tours/{id}', 'TourController@update');
+    $router->delete('tours/{id}', 'TourController@delete');
 });
