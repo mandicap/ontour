@@ -14,7 +14,7 @@ class TourController extends Controller
 
     public function show($id)
     {
-        return response()->json(Tour::find($id));
+        return response()->json(Tour::with('artists')->find($id));
     }
 
     public function create(Request $request)

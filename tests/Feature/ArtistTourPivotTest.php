@@ -59,4 +59,25 @@ class ArtistTourPivotTest extends TestCase
                 'tours' => $artist->tours()->get()
              ]);
     }
+
+    public function testReturnsSpecifiedTourWithArtistsInValidFormat()
+    {
+        $tour = Tour::factory()->create()->first();
+
+        $tour->artists()->create([
+            'name' => $this->faker->name,
+            'on_tour' => $this->faker->boolean()
+        ]);
+
+        $this->json('get', "api/tours/$tour->id")
+             ->seeStatusCode(Response::HTTP_OK)
+             ->seeJsonEquals([
+                 'id' => $tour->id,
+                 'name' => $tour->name,
+                 'active' => $tour->active,
+                 'created_at' => $tour->created_at,
+                 'updated_at' => $tour->updated_at,
+                 'artists' => $tour->artists()->get()
+             ]);
+    }
 }
