@@ -43,7 +43,7 @@ class ArtistTourPivotTest extends TestCase
     {
         $artist = Artist::factory()->create()->first();
 
-        $tour = $artist->tours()->create([
+        $artist->tours()->create([
             'name' => $this->faker->sentence(),
             'active' => $this->faker->boolean()
         ]);
