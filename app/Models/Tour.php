@@ -10,4 +10,14 @@ class Tour extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'active'];
+
+    /**
+     * Artists that belong to a tour
+     *
+     * @return  \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class)->using(ArtistTour::class);
+    }
 }

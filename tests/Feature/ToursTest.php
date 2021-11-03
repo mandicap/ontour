@@ -54,7 +54,8 @@ class ToursTest extends TestCase
                  'name' => $tour->name,
                  'active' => $tour->active,
                  'created_at' => $tour->created_at,
-                 'updated_at' => $tour->updated_at
+                 'updated_at' => $tour->updated_at,
+                 'artists' => $tour->artists()->get()
              ]);
     }
 
